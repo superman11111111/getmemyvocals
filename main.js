@@ -53,7 +53,7 @@ function start_download(uid) {
             if (jj.fileReady == false) {
               return setTimeout(function () {
                 start_download(uid)
-              }, 2000);
+              }, 3000);
             }
           }
         };

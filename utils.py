@@ -1,5 +1,3 @@
-
-
 from flask import request
 from functools import partial, wraps
 import logging
@@ -49,7 +47,7 @@ def load_track(track, audio_channels, samplerate):
     return wav
 
 
-def main(tracks):
+def demucs_seperate(tracks):
     parser = argparse.ArgumentParser("demucs.separate",
                                      description="Separate the sources for the given tracks")
     # parser.add_argument("tracks", nargs='+', type=Path,
@@ -129,7 +127,7 @@ def main(tracks):
         ref = wav.mean(0)
         wav = (wav - ref.mean()) / ref.std()
         sources = apply_model(model, wav[None], device=args.device, shifts=args.shifts,
-                              split=args.split, overlap=args.overlap, progress=True,
+                              split=args.split, overlap=args.overlap, progress=False,
                               num_workers=args.jobs)[0]
         sources = sources * ref.std() + ref.mean()
 
